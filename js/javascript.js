@@ -5,6 +5,7 @@ let GoL = null
 let x_grid_w = null
 let y_grid_h = null;
 let grid_ratio = 2
+let pause = false
 
 
 window.addEventListener("load", ()=>{
@@ -16,11 +17,18 @@ window.addEventListener("load", ()=>{
     tick()
 })
 
-
+window.addEventListener("keydown",(event)=>{
+    if(event.keyCode == 8){
+        console.log('allo')
+        pause = true
+        setTimeout(()=>{pause = false},10000)
+    }
+})
 
 const tick = () =>{
 
-    let newTiles = GoL.tick()
+    if(!pause){
+        let newTiles = GoL.tick()
         ctx.clearRect(0,0,canvas.width,canvas.height)
         let cpt = 0
         for(let y = 0; y < y_grid_h; y++ ){
@@ -36,8 +44,9 @@ const tick = () =>{
                 cpt++
             }
         }
-        
+    }
     setTimeout(() =>{window.requestAnimationFrame(tick)}, GoL.sp)
+    
 }
 
 
