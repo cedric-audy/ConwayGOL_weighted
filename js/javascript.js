@@ -6,6 +6,7 @@ let x_grid_w = null
 let y_grid_h = null;
 let grid_ratio = 2
 let pause = false
+let proghue = false
 let i = 0
 
 
@@ -24,6 +25,17 @@ window.addEventListener("keydown",(event)=>{
         pause = true
         setTimeout(()=>{pause = false},10000)
     }
+
+    else if(event.keyCode == 73){
+        proghue = !proghue
+    }
+
+    else if(event.keyCode == 37 || event.keyCode == 39){
+        x_grid_w = Math.floor(canvas.width/grid_ratio)
+        y_grid_h = Math.floor(canvas.height/grid_ratio)
+        GoL = new GoLmodel(x_grid_w,y_grid_h)
+    }
+
 })
 
 const tick = () =>{
@@ -35,7 +47,8 @@ const tick = () =>{
         for(let y = 0; y < y_grid_h; y++ ){
             for(let x = 0; x < x_grid_w; x++){
                 if (newTiles[cpt] >0) {
-                    let hue = (i - (newTiles[cpt] * GoL.rg))%360
+                    let starthue = proghue?i:GoL.sh
+                    let hue = (starthue - (newTiles[cpt] * GoL.rg))%360
                     ctx.fillStyle = 'hsl( '+ hue +',100%,50%)'
                 }
                 else{
