@@ -6,6 +6,7 @@ let x_grid_w = null
 let y_grid_h = null;
 let grid_ratio = 2
 let pause = false
+let i = 0
 
 
 window.addEventListener("load", ()=>{
@@ -34,7 +35,7 @@ const tick = () =>{
         for(let y = 0; y < y_grid_h; y++ ){
             for(let x = 0; x < x_grid_w; x++){
                 if (newTiles[cpt] >0) {
-                    let hue = (GoL.sh - (newTiles[cpt] * GoL.rg))%360
+                    let hue = (i - (newTiles[cpt] * GoL.rg))%360
                     ctx.fillStyle = 'hsl( '+ hue +',100%,50%)'
                 }
                 else{
@@ -45,6 +46,7 @@ const tick = () =>{
             }
         }
     }
+    i +=0.5
     setTimeout(() =>{window.requestAnimationFrame(tick)}, GoL.sp)
     
 }
