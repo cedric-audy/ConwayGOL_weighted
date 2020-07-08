@@ -6,7 +6,7 @@ let x_grid_w = null
 let y_grid_h = null;
 let grid_ratio = 2
 let pause = false
-let proghue = false
+let proghue = true
 let i = 0
 
 
@@ -15,7 +15,7 @@ window.addEventListener("load", ()=>{
     ctx = canvas.getContext("2d")
     x_grid_w = Math.floor(canvas.width/grid_ratio)
     y_grid_h = Math.floor(canvas.height/grid_ratio)
-    GoL = new GoLmodel(x_grid_w,y_grid_h)
+    GoL = new GoLmodel(x_grid_w,x_grid_w)
     tick()
 })
 
@@ -30,10 +30,10 @@ window.addEventListener("keydown",(event)=>{
         proghue = !proghue
     }
 
-    else if(event.keyCode == 37 || event.keyCode == 39){
+    else if(event.keyCode == 39){
         x_grid_w = Math.floor(canvas.width/grid_ratio)
         y_grid_h = Math.floor(canvas.height/grid_ratio)
-        GoL = new GoLmodel(x_grid_w,y_grid_h)
+        GoL.nextRule()
     }
 
 })
